@@ -1,6 +1,6 @@
 Package: mintyr
 Title: Streamlined Data Processing Tools for Genomic Selection
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(
     person("Guo Meng", , , "tony2015116@163.com", role = c("aut", "cre")),
     person("Guo Meng", role = "cph")
@@ -13,19 +13,18 @@ Description: A toolkit for genomic selection in animal breeding with
 License: MIT + file LICENSE
 URL: https://tony2015116.github.io/mintyr/
 BugReports: https://github.com/tony2015116/mintyr/issues
-Depends: R (>= 3.5.0)
-Imports: arrow, data.table, dplyr, parallel, purrr, readxl, rlang,
-        rsample, rstatix, stats, tibble, utils
+Depends: R (>= 4.1.0)
+Imports: arrow, data.table, dplyr, purrr, readxl, rlang, rsample,
+        rstatix, stats, tibble, utils
 Suggests: knitr, rmarkdown, testthat, tidyr, tools
 VignetteBuilder: knitr
 Config/fusen/version: 0.6.0
 Encoding: UTF-8
-LazyData: true
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 NeedsCompilation: no
-Packaged: 2024-12-12 01:59:42 UTC; Dell
+Packaged: 2025-10-13 06:38:02 UTC; Dell
 Author: Guo Meng [aut, cre],
   Guo Meng [cph]
 Maintainer: Guo Meng <tony2015116@163.com>
 Repository: CRAN
-Date/Publication: 2024-12-13 09:10:06 UTC
+Date/Publication: 2025-10-13 06:50:02 UTC

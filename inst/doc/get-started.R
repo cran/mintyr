@@ -97,7 +97,7 @@ dt_nest <- w2l_nest(
 # Step 2: Export nested data to files
 export_nest(
   nest_dt = dt_nest,        # Input nested data.table
-  nest_col = "data",        # Column containing nested data
+  nest_cols = "data",       # Column containing nested data
   group_cols = c("name", "Species")  # Columns to create directory structure
 )
 # Returns the number of files created
@@ -152,12 +152,6 @@ files <- list.files(
   full.names = TRUE         # Return full file paths
 )
 file.remove(files)          # Remove all exported files
-
-## ----example-fires------------------------------------------------------------
-head(fires())
-
-## ----example-nedaps-----------------------------------------------------------
-head(nedaps())
 
 ## ----example-convert_nest-----------------------------------------------------
 # Example 1: Create nested data structures
@@ -318,7 +312,9 @@ import_csv(
   csv_files,                      # Input CSV file paths
   package = "data.table",         # Use data.table for reading
   rbind = TRUE,                   # Combine all files into one data.table
-  rbind_label = "_file"           # Column name for file source
+  rbind_label = "_file",          # Column name for file source
+  keep_ext = TRUE,                # Include .csv extension in _file column
+  full_path = TRUE                # Show complete file paths in _file column
 )
 
 # Example 2: Import files separately using arrow
