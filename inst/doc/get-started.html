@@ -646,41 +646,20 @@ Note: when you will use other flat templates, this part will be in a separate fi
 <span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a><span class="co">#&gt; 2: versicolor &lt;data.table[50x4]&gt;</span></span>
 <span id="cb7-27"><a href="#cb7-27" tabindex="-1"></a><span class="co">#&gt; 3:  virginica &lt;data.table[50x4]&gt;</span></span>
 <span id="cb7-28"><a href="#cb7-28" tabindex="-1"></a></span>
-<span id="cb7-29"><a href="#cb7-29" tabindex="-1"></a><span class="co"># Convert specific nested columns</span></span>
-<span id="cb7-30"><a href="#cb7-30" tabindex="-1"></a><span class="fu">convert_nest</span>(</span>
-<span id="cb7-31"><a href="#cb7-31" tabindex="-1"></a>  df_nest2,                      <span class="co"># Input nested data frame</span></span>
-<span id="cb7-32"><a href="#cb7-32" tabindex="-1"></a>  <span class="at">to =</span> <span class="st">&quot;dt&quot;</span>,                     <span class="co"># Convert to data.table</span></span>
-<span id="cb7-33"><a href="#cb7-33" tabindex="-1"></a>  <span class="at">nest_cols =</span> <span class="st">&quot;data&quot;</span>             <span class="co"># Only convert &#39;data&#39; column</span></span>
-<span id="cb7-34"><a href="#cb7-34" tabindex="-1"></a>)</span>
-<span id="cb7-35"><a href="#cb7-35" tabindex="-1"></a><span class="co">#&gt; Warning: `...` must be empty in `format.tbl()`</span></span>
-<span id="cb7-36"><a href="#cb7-36" tabindex="-1"></a><span class="co">#&gt; `...` must be empty in `format.tbl()`</span></span>
-<span id="cb7-37"><a href="#cb7-37" tabindex="-1"></a><span class="co">#&gt; `...` must be empty in `format.tbl()`</span></span>
-<span id="cb7-38"><a href="#cb7-38" tabindex="-1"></a><span class="co">#&gt; Caused by error in `format_tbl()`:</span></span>
-<span id="cb7-39"><a href="#cb7-39" tabindex="-1"></a><span class="co">#&gt; ! `...` must be empty.</span></span>
-<span id="cb7-40"><a href="#cb7-40" tabindex="-1"></a><span class="co">#&gt; ✖ Problematic arguments:</span></span>
-<span id="cb7-41"><a href="#cb7-41" tabindex="-1"></a><span class="co">#&gt; • na.encode = FALSE</span></span>
-<span id="cb7-42"><a href="#cb7-42" tabindex="-1"></a><span class="co">#&gt; • timezone = timezone</span></span>
-<span id="cb7-43"><a href="#cb7-43" tabindex="-1"></a><span class="co">#&gt; • justify = justify</span></span>
-<span id="cb7-44"><a href="#cb7-44" tabindex="-1"></a><span class="co">#&gt;       Species               data          data2</span></span>
-<span id="cb7-45"><a href="#cb7-45" tabindex="-1"></a><span class="co">#&gt;        &lt;fctr&gt;             &lt;list&gt;         &lt;list&gt;</span></span>
-<span id="cb7-46"><a href="#cb7-46" tabindex="-1"></a><span class="co">#&gt; 1:     setosa &lt;data.table[50x4]&gt; &lt;tbl_df[50x5]&gt;</span></span>
-<span id="cb7-47"><a href="#cb7-47" tabindex="-1"></a><span class="co">#&gt; 2: versicolor &lt;data.table[50x4]&gt; &lt;tbl_df[50x5]&gt;</span></span>
-<span id="cb7-48"><a href="#cb7-48" tabindex="-1"></a><span class="co">#&gt; 3:  virginica &lt;data.table[50x4]&gt; &lt;tbl_df[50x5]&gt;</span></span>
-<span id="cb7-49"><a href="#cb7-49" tabindex="-1"></a></span>
-<span id="cb7-50"><a href="#cb7-50" tabindex="-1"></a><span class="co"># Example 3: Convert data table to data frame</span></span>
-<span id="cb7-51"><a href="#cb7-51" tabindex="-1"></a>dt_nest <span class="ot">&lt;-</span> mintyr<span class="sc">::</span><span class="fu">w2l_nest</span>(</span>
-<span id="cb7-52"><a href="#cb7-52" tabindex="-1"></a>  <span class="at">data =</span> iris,                   <span class="co"># Input dataset</span></span>
-<span id="cb7-53"><a href="#cb7-53" tabindex="-1"></a>  <span class="at">cols2l =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>                   <span class="co"># Columns to nest</span></span>
-<span id="cb7-54"><a href="#cb7-54" tabindex="-1"></a>)</span>
-<span id="cb7-55"><a href="#cb7-55" tabindex="-1"></a><span class="fu">convert_nest</span>(</span>
-<span id="cb7-56"><a href="#cb7-56" tabindex="-1"></a>  dt_nest,                       <span class="co"># Input nested data table</span></span>
-<span id="cb7-57"><a href="#cb7-57" tabindex="-1"></a>  <span class="at">to =</span> <span class="st">&quot;df&quot;</span>                      <span class="co"># Convert to data frame</span></span>
-<span id="cb7-58"><a href="#cb7-58" tabindex="-1"></a>)</span>
-<span id="cb7-59"><a href="#cb7-59" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 × 2</span></span>
-<span id="cb7-60"><a href="#cb7-60" tabindex="-1"></a><span class="co">#&gt;   name         data              </span></span>
-<span id="cb7-61"><a href="#cb7-61" tabindex="-1"></a><span class="co">#&gt;   &lt;fct&gt;        &lt;list&gt;            </span></span>
-<span id="cb7-62"><a href="#cb7-62" tabindex="-1"></a><span class="co">#&gt; 1 Sepal.Length &lt;tibble [150 × 4]&gt;</span></span>
-<span id="cb7-63"><a href="#cb7-63" tabindex="-1"></a><span class="co">#&gt; 2 Sepal.Width  &lt;tibble [150 × 4]&gt;</span></span></code></pre></div>
+<span id="cb7-29"><a href="#cb7-29" tabindex="-1"></a><span class="co"># Example 3: Convert data table to data frame</span></span>
+<span id="cb7-30"><a href="#cb7-30" tabindex="-1"></a>dt_nest <span class="ot">&lt;-</span> mintyr<span class="sc">::</span><span class="fu">w2l_nest</span>(</span>
+<span id="cb7-31"><a href="#cb7-31" tabindex="-1"></a>  <span class="at">data =</span> iris,                   <span class="co"># Input dataset</span></span>
+<span id="cb7-32"><a href="#cb7-32" tabindex="-1"></a>  <span class="at">cols2l =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>                   <span class="co"># Columns to nest</span></span>
+<span id="cb7-33"><a href="#cb7-33" tabindex="-1"></a>)</span>
+<span id="cb7-34"><a href="#cb7-34" tabindex="-1"></a><span class="fu">convert_nest</span>(</span>
+<span id="cb7-35"><a href="#cb7-35" tabindex="-1"></a>  dt_nest,                       <span class="co"># Input nested data table</span></span>
+<span id="cb7-36"><a href="#cb7-36" tabindex="-1"></a>  <span class="at">to =</span> <span class="st">&quot;df&quot;</span>                      <span class="co"># Convert to data frame</span></span>
+<span id="cb7-37"><a href="#cb7-37" tabindex="-1"></a>)</span>
+<span id="cb7-38"><a href="#cb7-38" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 × 2</span></span>
+<span id="cb7-39"><a href="#cb7-39" tabindex="-1"></a><span class="co">#&gt;   name         data              </span></span>
+<span id="cb7-40"><a href="#cb7-40" tabindex="-1"></a><span class="co">#&gt;   &lt;fct&gt;        &lt;list&gt;            </span></span>
+<span id="cb7-41"><a href="#cb7-41" tabindex="-1"></a><span class="co">#&gt; 1 Sepal.Length &lt;tibble [150 × 4]&gt;</span></span>
+<span id="cb7-42"><a href="#cb7-42" tabindex="-1"></a><span class="co">#&gt; 2 Sepal.Width  &lt;tibble [150 × 4]&gt;</span></span></code></pre></div>
 </div>
 <div id="get_path_segment" class="section level1">
 <h1>get_path_segment</h1>
@@ -778,7 +757,7 @@ Note: when you will use other flat templates, this part will be in a separate fi
 <h1>mintyr_example</h1>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Get path to an example file</span></span>
 <span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="fu">mintyr_example</span>(<span class="st">&quot;csv_test1.csv&quot;</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="co">#&gt; [1] &quot;C:/Users/Dell/AppData/Local/Temp/RtmpS6pw75/Rinst57d4548c645b/mintyr/extdata/csv_test1.csv&quot;</span></span></code></pre></div>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="co">#&gt; [1] &quot;C:/Users/Dell/AppData/Local/Temp/RtmpYB9Y1S/Rinst38b0670f21db/mintyr/extdata/csv_test1.csv&quot;</span></span></code></pre></div>
 </div>
 <div id="mintyr_examples" class="section level1">
 <h1>mintyr_examples</h1>
@@ -858,12 +837,12 @@ Note: when you will use other flat templates, this part will be in a separate fi
 <span id="cb13-16"><a href="#cb13-16" tabindex="-1"></a>)</span>
 <span id="cb13-17"><a href="#cb13-17" tabindex="-1"></a><span class="co">#&gt;                                                                                         _file</span></span>
 <span id="cb13-18"><a href="#cb13-18" tabindex="-1"></a><span class="co">#&gt;                                                                                        &lt;char&gt;</span></span>
-<span id="cb13-19"><a href="#cb13-19" tabindex="-1"></a><span class="co">#&gt; 1: C:/Users/Dell/AppData/Local/Temp/RtmpS6pw75/Rinst57d4548c645b/mintyr/extdata/csv_test1.csv</span></span>
-<span id="cb13-20"><a href="#cb13-20" tabindex="-1"></a><span class="co">#&gt; 2: C:/Users/Dell/AppData/Local/Temp/RtmpS6pw75/Rinst57d4548c645b/mintyr/extdata/csv_test1.csv</span></span>
-<span id="cb13-21"><a href="#cb13-21" tabindex="-1"></a><span class="co">#&gt; 3: C:/Users/Dell/AppData/Local/Temp/RtmpS6pw75/Rinst57d4548c645b/mintyr/extdata/csv_test1.csv</span></span>
-<span id="cb13-22"><a href="#cb13-22" tabindex="-1"></a><span class="co">#&gt; 4: C:/Users/Dell/AppData/Local/Temp/RtmpS6pw75/Rinst57d4548c645b/mintyr/extdata/csv_test2.csv</span></span>
-<span id="cb13-23"><a href="#cb13-23" tabindex="-1"></a><span class="co">#&gt; 5: C:/Users/Dell/AppData/Local/Temp/RtmpS6pw75/Rinst57d4548c645b/mintyr/extdata/csv_test2.csv</span></span>
-<span id="cb13-24"><a href="#cb13-24" tabindex="-1"></a><span class="co">#&gt; 6: C:/Users/Dell/AppData/Local/Temp/RtmpS6pw75/Rinst57d4548c645b/mintyr/extdata/csv_test2.csv</span></span>
+<span id="cb13-19"><a href="#cb13-19" tabindex="-1"></a><span class="co">#&gt; 1: C:/Users/Dell/AppData/Local/Temp/RtmpYB9Y1S/Rinst38b0670f21db/mintyr/extdata/csv_test1.csv</span></span>
+<span id="cb13-20"><a href="#cb13-20" tabindex="-1"></a><span class="co">#&gt; 2: C:/Users/Dell/AppData/Local/Temp/RtmpYB9Y1S/Rinst38b0670f21db/mintyr/extdata/csv_test1.csv</span></span>
+<span id="cb13-21"><a href="#cb13-21" tabindex="-1"></a><span class="co">#&gt; 3: C:/Users/Dell/AppData/Local/Temp/RtmpYB9Y1S/Rinst38b0670f21db/mintyr/extdata/csv_test1.csv</span></span>
+<span id="cb13-22"><a href="#cb13-22" tabindex="-1"></a><span class="co">#&gt; 4: C:/Users/Dell/AppData/Local/Temp/RtmpYB9Y1S/Rinst38b0670f21db/mintyr/extdata/csv_test2.csv</span></span>
+<span id="cb13-23"><a href="#cb13-23" tabindex="-1"></a><span class="co">#&gt; 5: C:/Users/Dell/AppData/Local/Temp/RtmpYB9Y1S/Rinst38b0670f21db/mintyr/extdata/csv_test2.csv</span></span>
+<span id="cb13-24"><a href="#cb13-24" tabindex="-1"></a><span class="co">#&gt; 6: C:/Users/Dell/AppData/Local/Temp/RtmpYB9Y1S/Rinst38b0670f21db/mintyr/extdata/csv_test2.csv</span></span>
 <span id="cb13-25"><a href="#cb13-25" tabindex="-1"></a><span class="co">#&gt;     col1   col2   col3</span></span>
 <span id="cb13-26"><a href="#cb13-26" tabindex="-1"></a><span class="co">#&gt;    &lt;int&gt; &lt;char&gt; &lt;lgcl&gt;</span></span>
 <span id="cb13-27"><a href="#cb13-27" tabindex="-1"></a><span class="co">#&gt; 1:     4      d  FALSE</span></span>
@@ -926,8 +905,8 @@ Note: when you will use other flat templates, this part will be in a separate fi
 <span id="cb14-27"><a href="#cb14-27" tabindex="-1"></a>  <span class="at">rm_extension =</span> <span class="cn">TRUE</span>,            <span class="co"># Remove file extensions</span></span>
 <span id="cb14-28"><a href="#cb14-28" tabindex="-1"></a>  <span class="at">rm_path =</span> <span class="cn">FALSE</span>                 <span class="co"># Keep directory paths</span></span>
 <span id="cb14-29"><a href="#cb14-29" tabindex="-1"></a>)</span>
-<span id="cb14-30"><a href="#cb14-30" tabindex="-1"></a><span class="co">#&gt; [1] &quot;C:/Users/Dell/AppData/Local/Temp/RtmpS6pw75/Rinst57d4548c645b/mintyr/extdata/xlsx_test1&quot;</span></span>
-<span id="cb14-31"><a href="#cb14-31" tabindex="-1"></a><span class="co">#&gt; [2] &quot;C:/Users/Dell/AppData/Local/Temp/RtmpS6pw75/Rinst57d4548c645b/mintyr/extdata/xlsx_test2&quot;</span></span></code></pre></div>
+<span id="cb14-30"><a href="#cb14-30" tabindex="-1"></a><span class="co">#&gt; [1] &quot;C:/Users/Dell/AppData/Local/Temp/RtmpYB9Y1S/Rinst38b0670f21db/mintyr/extdata/xlsx_test1&quot;</span></span>
+<span id="cb14-31"><a href="#cb14-31" tabindex="-1"></a><span class="co">#&gt; [2] &quot;C:/Users/Dell/AppData/Local/Temp/RtmpYB9Y1S/Rinst38b0670f21db/mintyr/extdata/xlsx_test2&quot;</span></span></code></pre></div>
 </div>
 <div id="w2l_nest" class="section level1">
 <h1>w2l_nest</h1>
