@@ -5,7 +5,7 @@
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/mintyr)](https://CRAN.R-project.org/package=mintyr)
 [![CRAN total downloads](https://cranlogs.r-pkg.org/badges/grand-total/mintyr)](https://CRAN.R-project.org/package=mintyr)
-[![Dev Version](https://img.shields.io/badge/devel%20version-0.1.2.9000-purple.svg)](https://github.com/tony2015116/mintyr)
+[![Dev Version](https://img.shields.io/badge/devel%20version-0.1.3.9000-purple.svg)](https://github.com/tony2015116/mintyr)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![R-CMD-check](https://github.com/tony2015116/mintyr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tony2015116/mintyr/actions/workflows/R-CMD-check.yaml)
 [![GitHub last commit](https://img.shields.io/github/last-commit/tony2015116/mintyr)](#)
@@ -14,9 +14,39 @@
 <!--[![CodeFactor](https://www.codefactor.io/repository/github/tony2015116/mintyr/badge/main)](https://www.codefactor.io/repository/github/tony2015116/mintyr/overview/main)
 [![GitHub R package version](https://img.shields.io/github/r-package/v/tony2015116/mintyr)](#)-->
 
-`mintyr` is a toolkit for genomic selection in animal breeding with emphasis on multi-breed and multi-trait nested grouping operations. Streamlines iterative analysis workflows when working with `ASReml-R` package. Includes utility functions for phenotypic data processing commonly used by animal breeders.
+`mintyr` is a high-performance data processing toolkit designed specifically for **animal breeding and genomic selection**. Leveraging the zero-copy and multi-threading capabilities of `data.table`, it significantly simplifies the construction of automated data pipelines in large-scale commercial breeding programs (e.g., coordinating data across nucleus and multiplier farms, or handling multi-trait growth test records).
 
-## Installation
+The package is not only highly optimized for iterative analysis workflows with the `ASReml-R` package (supporting dynamic modeling and multi-trait/multi-breed nested grouping), but is also capable of generating and batch-exporting formatted phenotypic data files required for automated pipeline analyses in other mainstream command-line breeding software (e.g., HIBLUP, DMU).
+
+## ✨ Key Features
+
+`mintyr` covers five critical stages in the lifecycle of breeding data analysis:
+
+**🚀 High-Performance Data I/O (`import_xlsx`, `import_csv`, `export_xlsx`)**
+
+A transparent round-trip for multi-file, multi-sheet tabular data: import many files into one tidy `data.table`, transform freely, then write the original file/sheet structure back out — no bookkeeping required.
+
+- **Import (`import_xlsx`, `import_csv`):** native support for merging multiple files and sheets simultaneously, with source tracking columns (`excel_name`, `sheet_name`) appended automatically to prevent data confusion across different farms or batches. In-place `data.table` conversion keeps the memory footprint minimal, and `import_xlsx` can spread the per-sheet parse across CPU cores on demand (opt-in via `workers`) — a fork pool on Linux/macOS, a PSOCK cluster on Windows.
+- **Export (`export_xlsx`):** the round-trip companion — a single `path` argument decides the destination. A **directory** writes one `.xlsx` per `excel_name` value (one sheet per `sheet_name`); a **`.xlsx` file path** writes everything into one workbook. Worksheet splitting follows the data automatically, and the tracking columns are stripped by default so exported sheets match the originals.
+
+**🔄 Automated Data Reshaping & Nesting (`w2l_nest`, `c2p_nest`, `r2p_nest`)**
+
+- `c2p_nest`: Column-to-pairs nested transformation that automatically renames feature columns, providing standard uniform inputs for iterative multi-trait genetic correlation evaluations.
+- `w2l_nest` / `w2l_split`: Wide-to-long format transformations with subsetting and nesting by grouping variables (e.g., farm, breed, or line).
+
+**🧪 Cross-Validation & Model Evaluation (`split_cv`, `nest_cv`)**
+
+- Provides streamlined k-fold cross-validation and repeated CV splitting tailored for nested `data.table` structures, facilitating the evaluation of breeding value prediction accuracy (GP).
+
+**📊 Batch Exporting for Breeding Software (`export_nest`, `export_list`)**
+
+- Automatically builds local folder hierarchies and batch-exports data based on nested groups or list structures (e.g., `tempdir()/Line/Breed/data.txt`), providing seamless text-file preparation to bridge the gap with command-line driven breeding evaluation software like HIBLUP and DMU.
+
+**🛠️ Phenotypic Statistics & Preprocessing (`top_perc`, `format_digits`, `get_path_info`)**
+
+- Quickly extracts the top N% performing individuals for specific traits, supporting independent extraction by analytical groups (e.g., different test batches), alongside robust number formatting and path-parsing utilities.
+
+## 📥 Installation
 You can install this package from either CRAN or GitHub:
 ``` r
 ### From CRAN
@@ -24,10 +54,10 @@ install.packages("mintyr")
 ### From GitHub
 pak::pak("tony2015116/mintyr")
 ```
-## Cheat sheet
+## 📋️ Cheat Sheet
 <a href='https://raw.githubusercontent.com/tony2015116/mintyr/main/man/figures/cheatsheet.svg' target="_blank"><img src='https://raw.githubusercontent.com/tony2015116/mintyr/main/man/figures/cheatsheet.svg' alt="mintyr package quick reference guide and cheatsheet" width="800" align="center" /></a>
 
 
-## Acknowledgments
+## 🤝 Acknowledgments
 
-Special thanks to AI assistance, particularly ChatGPT and Claude, for helping transform the initial concepts and inspirations for the `mintyr` package into reality. Their contribution has been invaluable in refining ideas, improving code structure, and crafting documentation.
+Special thanks to AI assistance, for helping transform the initial concepts and inspirations for the `mintyr` package into reality. Their contribution has been invaluable in refining ideas, improving code structure, and crafting documentation.
